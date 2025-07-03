@@ -8,6 +8,7 @@ function App() {
   const fetchLanguage = () => {
     setLoading(true);
     setError(null);
+
     fetch("https://test-deploy-39q5.onrender.com/api/language")
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
@@ -17,13 +18,13 @@ function App() {
         setLanguage(data);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Error fetching language:", err);
         setError("Failed to load language");
         setLoading(false);
       });
   };
 
-  // Fetch once on mount
   useEffect(() => {
     fetchLanguage();
   }, []);
@@ -46,7 +47,6 @@ function App() {
         </p>
       </header>
 
-      {/* Random Language Picker */}
       <section
         style={{
           backgroundColor: "#f4f4f4",
@@ -102,7 +102,6 @@ function App() {
         </button>
       </section>
 
-      {/* Footer */}
       <footer style={{ marginTop: "4rem", textAlign: "center", color: "#888" }}>
         <p>
           Connect with me on{" "}
